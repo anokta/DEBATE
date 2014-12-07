@@ -229,8 +229,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0815c01479c93444299e061669cc14fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerID: 0
   speed: 5
-  acceleration: 20
+  acceleration: 15
   voice: 0
 --- !u!148 &14800000
 NetworkView:

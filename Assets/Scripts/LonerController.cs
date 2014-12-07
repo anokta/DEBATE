@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class LonerController : MonoBehaviour
 {
+    public int playerID;
+
     public float speed, acceleration;
     public int voice;
 
@@ -66,16 +68,29 @@ public class LonerController : MonoBehaviour
             {
                 Anger -= 2.0f * UNIT_ANGER * Time.deltaTime;
             }
-        }
-
+        } 
+        
         if (Network.isClient)
         {
+            int myID = int.Parse(Network.player.ToString());
+
             if (currentColor != targetColor)
             {
+                if (myID == playerID)
+                {
+                    Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, 6.0f - 4.0f * anger, 2 * Time.deltaTime);
+                }
+
                 currentColor = Color.Lerp(currentColor, targetColor, 2.5f * Time.deltaTime);
                 renderer.material.color = currentColor;
 
-                chorus.depth = targetColor.r * 0.5f;
+                chorus.depth = anger;
+            }
+
+            if (myID == playerID) // && Camera.main.transform.position != transform.position - Vector3.forward * 5.0f)
+            {
+                Vector3 vel = Vector3.zero;
+                Camera.main.transform.position = Vector3.SmoothDamp(Camera.main.transform.position, transform.position + new Vector3(0.0f, 1.0f, -5.0f), ref vel, 1.75f * Camera.main.orthographicSize * Time.smoothDeltaTime);
             }
 
             if (transform.position != targetPosition)
@@ -90,6 +105,11 @@ public class LonerController : MonoBehaviour
                 }
             }
         }
+    }
+
+    void FixedUpdate()
+    {
+
     }
 
     public void Move(int x)
@@ -111,6 +131,11 @@ public class LonerController : MonoBehaviour
         if (rights.Length + lefts.Length == 0)
         {
             Anger += 1.5f * UNIT_ANGER;
+
+            if(Anger > 1.0f)
+            {
+                Debug.Log(Network.player.guid + " died.");
+            }
         }
 
         foreach (RaycastHit hit in rights)
@@ -118,8 +143,15 @@ public class LonerController : MonoBehaviour
             if (hit.transform.tag.Equals("Player"))
             {
                 Anger -= 1.25f * UNIT_ANGER;
-                hit.transform.gameObject.GetComponent<LonerController>().Anger += 2.5f * UNIT_ANGER;
-                hit.rigidbody.AddForce(Mathf.Min(MAX_PUSH, 1.0f / hit.distance * Mathf.Max(MIN_ANGER, anger * MAX_ANGER)) * Vector3.right);
+
+                LonerController victim = hit.transform.gameObject.GetComponent<LonerController>();
+                victim.Anger += 2.5f * UNIT_ANGER;
+                victim.rigidbody.AddForce(Mathf.Min(MAX_PUSH, 1.0f / hit.distance * Mathf.Max(MIN_ANGER, anger * MAX_ANGER)) * Vector3.right);
+
+                if (victim.Anger > 1.0f)
+                {
+                    Debug.Log(" died.");
+                }
             }
         }
         foreach (RaycastHit hit in lefts)
@@ -127,8 +159,14 @@ public class LonerController : MonoBehaviour
             if (hit.transform.tag.Equals("Player"))
             {
                 Anger -= 1.25f * UNIT_ANGER;
-                hit.transform.gameObject.GetComponent<LonerController>().Anger += 2.5f * UNIT_ANGER;
-                hit.rigidbody.AddForce(Mathf.Min(MAX_PUSH, 1.0f / hit.distance * Mathf.Max(MIN_ANGER, anger * MAX_ANGER)) * Vector3.left);
+                LonerController victim = hit.transform.gameObject.GetComponent<LonerController>();
+                victim.Anger += 2.5f * UNIT_ANGER;
+                victim.rigidbody.AddForce(Mathf.Min(MAX_PUSH, 1.0f / hit.distance * Mathf.Max(MIN_ANGER, anger * MAX_ANGER)) * Vector3.left);
+
+                if(victim.Anger > 1.0f)
+                {
+                    Debug.Log(" died.");
+                }
             }
         }
     }
@@ -139,6 +177,8 @@ public class LonerController : MonoBehaviour
 
         if (stream.isWriting)
         {
+            stream.Serialize(ref playerID);
+
             stream.Serialize(ref position);
 
             stream.Serialize(ref shoutCurrent);
@@ -148,9 +188,13 @@ public class LonerController : MonoBehaviour
 
             float r = targetColor.r, g = targetColor.g, b = targetColor.b;
             stream.Serialize(ref r); stream.Serialize(ref g); stream.Serialize(ref b);
+
+            stream.Serialize(ref anger);
         }
         else
         {
+            stream.Serialize(ref playerID);
+
             stream.Serialize(ref position);
             targetPosition = position;
 
@@ -162,6 +206,8 @@ public class LonerController : MonoBehaviour
             float r = targetColor.r, g = targetColor.g, b = targetColor.b;
             stream.Serialize(ref r); stream.Serialize(ref g); stream.Serialize(ref b);
             targetColor = new Color(r, g, b);
+
+            stream.Serialize(ref anger);
         }
     }
 

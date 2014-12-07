@@ -3,6 +3,8 @@ using System.Collections;
 
 public class NetworkManager : MonoBehaviour
 {
+    public static int PlayerCount;
+
     public int masterPort = 23466;
     public string masterIP = "54.174.144.122";
 
@@ -17,7 +19,6 @@ public class NetworkManager : MonoBehaviour
     public float waitInterval = 5.0f;
     float elapsed;
 
-    int playerCount;
     bool serverInitialized;
 
     GameManager gameManager;
@@ -28,7 +29,7 @@ public class NetworkManager : MonoBehaviour
         MasterServer.ipAddress = masterIP;
         MasterServer.dedicatedServer = true;
 
-        playerCount = 0;
+        PlayerCount = 0;
         serverInitialized = false;
         elapsed = -waitInterval;
 
@@ -41,7 +42,7 @@ public class NetworkManager : MonoBehaviour
         {
             Debug.Log("Connecting..");
 
-            elapsed = Time.time; 
+            elapsed = Time.time;
 
             if (isHost)
             {
@@ -100,14 +101,14 @@ public class NetworkManager : MonoBehaviour
 
         gameManager.DeletePlayer(playerID);
 
-        playerCount--;
+        PlayerCount--;
     }
 
     void OnPlayerConnected(NetworkPlayer player)
     {
-        playerCount++;
+        PlayerCount++;
 
-        Debug.Log("[HOST] Player " + playerCount + " connected from " + player.ipAddress + ":" + player.port);
+        Debug.Log("[HOST] Player " + PlayerCount + " connected from " + player.ipAddress + ":" + player.port);
 
         gameManager.SpawnPlayer(int.Parse(player.ToString()));
     }
@@ -139,5 +140,5 @@ public class NetworkManager : MonoBehaviour
         Debug.Log("Could not connect to server: " + error);
 
         serverInitialized = false;
-     }
+    }
 }

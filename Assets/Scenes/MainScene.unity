@@ -229,7 +229,7 @@ GUIText:
   m_GameObject: {fileID: 961851295}
   m_Enabled: 1
   serializedVersion: 3
-  m_Text: Welcome to Ludum Dare's 31th
+  m_Text: Welcome to Ludum Dare's 31st
   m_Anchor: 4
   m_Alignment: 1
   m_PixelOffset: {x: 0, y: 0}
@@ -507,7 +507,79 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
---- !u!1001 &1244984100
+--- !u!1 &1330273725
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100000, guid: 121673f2cab62bf42b653357206a6ca9, type: 2}
+  m_PrefabInternal: {fileID: 2062220344}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1330273729}
+  - 33: {fileID: 1330273728}
+  - 65: {fileID: 1330273727}
+  - 23: {fileID: 1330273726}
+  m_Layer: 0
+  m_Name: Floor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!23 &1330273726
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 2300000, guid: 121673f2cab62bf42b653357206a6ca9,
+    type: 2}
+  m_PrefabInternal: {fileID: 2062220344}
+  m_GameObject: {fileID: 1330273725}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!65 &1330273727
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6500000, guid: 121673f2cab62bf42b653357206a6ca9,
+    type: 2}
+  m_PrefabInternal: {fileID: 2062220344}
+  m_GameObject: {fileID: 1330273725}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!33 &1330273728
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 3300000, guid: 121673f2cab62bf42b653357206a6ca9,
+    type: 2}
+  m_PrefabInternal: {fileID: 2062220344}
+  m_GameObject: {fileID: 1330273725}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1330273729
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400000, guid: 121673f2cab62bf42b653357206a6ca9, type: 2}
+  m_PrefabInternal: {fileID: 2062220344}
+  m_GameObject: {fileID: 1330273725}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -50, z: 0}
+  m_LocalScale: {x: 100, y: 100, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+--- !u!1001 &2062220344
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -520,7 +592,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 121673f2cab62bf42b653357206a6ca9, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -500
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 121673f2cab62bf42b653357206a6ca9, type: 2}
       propertyPath: m_LocalPosition.z
@@ -551,78 +623,6 @@ Prefab:
   m_RootGameObject: {fileID: 1330273725}
   m_IsPrefabParent: 0
   m_IsExploded: 1
---- !u!1 &1330273725
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100000, guid: 121673f2cab62bf42b653357206a6ca9, type: 2}
-  m_PrefabInternal: {fileID: 1244984100}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1330273729}
-  - 33: {fileID: 1330273728}
-  - 65: {fileID: 1330273727}
-  - 23: {fileID: 1330273726}
-  m_Layer: 0
-  m_Name: Floor
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!23 &1330273726
-Renderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 2300000, guid: 121673f2cab62bf42b653357206a6ca9,
-    type: 2}
-  m_PrefabInternal: {fileID: 1244984100}
-  m_GameObject: {fileID: 1330273725}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
---- !u!65 &1330273727
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6500000, guid: 121673f2cab62bf42b653357206a6ca9,
-    type: 2}
-  m_PrefabInternal: {fileID: 1244984100}
-  m_GameObject: {fileID: 1330273725}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!33 &1330273728
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 3300000, guid: 121673f2cab62bf42b653357206a6ca9,
-    type: 2}
-  m_PrefabInternal: {fileID: 1244984100}
-  m_GameObject: {fileID: 1330273725}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1330273729
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400000, guid: 121673f2cab62bf42b653357206a6ca9, type: 2}
-  m_PrefabInternal: {fileID: 1244984100}
-  m_GameObject: {fileID: 1330273725}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -500, z: 0}
-  m_LocalScale: {x: 1000, y: 1000, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
 --- !u!1 &2122913206
 GameObject:
   m_ObjectHideFlags: 0
@@ -635,7 +635,6 @@ GameObject:
   - 92: {fileID: 2122913209}
   - 124: {fileID: 2122913208}
   - 81: {fileID: 2122913207}
-  - 114: {fileID: 2122913212}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -708,15 +707,3 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &2122913212
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2122913206}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86791cb7f15da2c41af641019910a107, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  zoomoutSpeed: 0

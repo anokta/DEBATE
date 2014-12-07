@@ -61,6 +61,7 @@ public class GameManager : MonoBehaviour {
 
     void GameMenu()
     {
+        Debug.Log(1.0f / Time.deltaTime);
         targetVolume = 0.0f;
     }
 
@@ -78,7 +79,7 @@ public class GameManager : MonoBehaviour {
 
     Vector3 getPlayerSpawnPosition()
     {
-        return new Vector3(Random.Range(-5, 5), 0, 0);
+        return new Vector3(Random.Range(-4 * NetworkManager.PlayerCount, 4 * NetworkManager.PlayerCount), 0, 0);
     }
 
     Color getSkinColor()
@@ -96,7 +97,7 @@ public class GameManager : MonoBehaviour {
     public void SpawnPlayer(int playerID)
     {
         players[playerID] = ((GameObject)Network.Instantiate(playerPrefab, getPlayerSpawnPosition(), Quaternion.identity, playerID)).GetComponent<LonerController>();
-
+        players[playerID].playerID = playerID;
         players[playerID].SkinColor = getSkinColor();
         players[playerID].voice = Random.Range(-5, 3);
     }
