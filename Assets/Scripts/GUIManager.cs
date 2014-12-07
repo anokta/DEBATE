@@ -33,13 +33,17 @@ public class GUIManager : MonoBehaviour {
         {
             if (currentAlpha != targetAlpha)
             {
-                currentAlpha = Mathf.Lerp(currentAlpha, targetAlpha, 2 * Time.deltaTime);
+                currentAlpha = Mathf.Lerp(currentAlpha, targetAlpha, 1.5f * Time.deltaTime);
             }
 
-            Color c = welcome.color;
+            Color c;
+            
+            c = welcome.color;
             c.a = currentAlpha;
-
             welcome.color = c;
+
+            c = title.color;
+            c.a = currentAlpha;
             title.color = c;
         }
     }

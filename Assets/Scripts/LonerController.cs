@@ -4,7 +4,13 @@ using System.Collections.Generic;
 
 public class LonerController : MonoBehaviour
 {
-    public int playerID;
+    TextMesh label;
+    int playerID;
+    public int PlayerID
+    {
+        get { return playerID; }
+        set { playerID = value; }
+    }
 
     public float speed, acceleration;
     public int voice;
@@ -49,6 +55,8 @@ public class LonerController : MonoBehaviour
         targetPosition = transform.position;
 
         chorus = GetComponent<AudioChorusFilter>();
+
+        label = GetComponentInChildren<TextMesh>();
     }
 
     void Update()
@@ -74,6 +82,8 @@ public class LonerController : MonoBehaviour
         {
             int myID = int.Parse(Network.player.ToString());
 
+            label.text = myID == playerID ? "Myself" : "Candidate #" + playerID;
+
             if (currentColor != targetColor)
             {
                 if (myID == playerID)
@@ -85,6 +95,9 @@ public class LonerController : MonoBehaviour
                 renderer.material.color = currentColor;
 
                 chorus.depth = anger;
+
+                currentColor.a = 0.75f;
+                label.color = currentColor;
             }
 
             if (myID == playerID) // && Camera.main.transform.position != transform.position - Vector3.forward * 5.0f)
@@ -105,11 +118,6 @@ public class LonerController : MonoBehaviour
                 }
             }
         }
-    }
-
-    void FixedUpdate()
-    {
-
     }
 
     public void Move(int x)

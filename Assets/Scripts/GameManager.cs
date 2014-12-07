@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour {
     public void SpawnPlayer(int playerID)
     {
         players[playerID] = ((GameObject)Network.Instantiate(playerPrefab, getPlayerSpawnPosition(), Quaternion.identity, playerID)).GetComponent<LonerController>();
-        players[playerID].playerID = playerID;
+        players[playerID].PlayerID = playerID;
         players[playerID].SkinColor = getSkinColor();
         players[playerID].voice = Random.Range(-5, 3);
     }
