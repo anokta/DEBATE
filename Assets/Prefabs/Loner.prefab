@@ -32,6 +32,7 @@ GameObject:
   - 65: {fileID: 6500000}
   - 54: {fileID: 5400000}
   - 148: {fileID: 14800000}
+  - 166: {fileID: 16600000}
   m_Layer: 0
   m_Name: Loner
   m_TagString: Player
@@ -154,8 +155,8 @@ AudioSource:
   Mute: 0
   Priority: 128
   DopplerLevel: 2
-  MinDistance: 1
-  MaxDistance: 25
+  MinDistance: 2.5
+  MaxDistance: 100
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -190,7 +191,7 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - time: 0
-      value: .547222197
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -243,6 +244,20 @@ NetworkView:
   m_ViewID:
     m_ID: 0
     m_Type: 0
+--- !u!166 &16600000
+AudioChorusFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_DryMix: .5
+  m_WetMix1: .5
+  m_WetMix2: .5
+  m_WetMix3: .5
+  m_Delay: 40
+  m_Rate: 1
+  m_Depth: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -19,6 +19,7 @@ public class LonerController : MonoBehaviour
     Vector3 targetPosition;
 
     AudioSource sample;
+    AudioChorusFilter chorus;
     int shoutLength, shoutCurrent;
 
     private Color skinColor, currentColor, targetColor;
@@ -44,32 +45,37 @@ public class LonerController : MonoBehaviour
         voice = 0;
 
         targetPosition = transform.position;
+
+        chorus = GetComponent<AudioChorusFilter>();
     }
 
     void Update()
     {
-        if (Network.isServer)
+        if (shoutCurrent < shoutLength && !sample.isPlaying)
         {
-            if (shoutCurrent < shoutLength && !sample.isPlaying)
-            {
-                sample.pitch = MusicalProperties.GetRandomPitch(voice);
-                sample.Play();
+            sample.pitch = MusicalProperties.GetRandomPitch(voice);
+            sample.Play();
 
-                shoutCurrent++;
+            shoutCurrent++;
 
-                rigidbody.AddForce(new Vector3(Random.Range(-0.15f, 0.15f), 1.0f, 0.0f) * (40 + Mathf.Min(0.5f, anger) * 10));
-            }
-            else
+            rigidbody.AddForce(new Vector3(Random.Range(-0.15f, 0.15f), 1.0f, 0.0f) * (40 + Mathf.Min(0.5f, anger) * 10));
+        }
+        else
+        {
+            if (Network.isServer)
             {
                 Anger -= 2.0f * UNIT_ANGER * Time.deltaTime;
             }
         }
-        else
+
+        if (Network.isClient)
         {
             if (currentColor != targetColor)
             {
                 currentColor = Color.Lerp(currentColor, targetColor, 2.5f * Time.deltaTime);
                 renderer.material.color = currentColor;
+
+                chorus.depth = targetColor.r * 0.5f;
             }
 
             if (transform.position != targetPosition)
