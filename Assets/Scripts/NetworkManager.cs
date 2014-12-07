@@ -111,17 +111,18 @@ public class NetworkManager : MonoBehaviour
     {
         Debug.Log("[HOST] Clean up after player " + player);
 
-        Network.RemoveRPCs(player);
-        Network.DestroyPlayerObjects(player);
+        int playerID = int.Parse(player.ToString());
 
-        gameManager.DeletePlayer(int.Parse(player.ToString()));
+        Network.RemoveRPCsInGroup(playerID);
+
+        gameManager.DeletePlayer(playerID);
     }
 
     void OnPlayerConnected(NetworkPlayer player)
     {
         Debug.Log("[HOST] Player " + playerCount++ + " connected from " + player.ipAddress + ":" + player.port);
 
-        gameManager.SpawnPlayer(player);
+        gameManager.SpawnPlayer(int.Parse(player.ToString()));
     }
 
     void OnConnectedToServer()

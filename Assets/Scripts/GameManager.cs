@@ -29,12 +29,11 @@ public class GameManager : MonoBehaviour {
         return skinColor;
     }
 
-    public void SpawnPlayer(NetworkPlayer player)
+    public void SpawnPlayer(int playerID)
     {
-        networkView.RPC("SpawnPlayer", player, player);
-        players[int.Parse(player.ToString())] = ((GameObject)Network.Instantiate(playerPrefab, getPlayerSpawnPosition(), Quaternion.identity, 1)).GetComponent<LonerController>();
+        players[playerID] = ((GameObject)Network.Instantiate(playerPrefab, getPlayerSpawnPosition(), Quaternion.identity, playerID)).GetComponent<LonerController>();
             
-        players[int.Parse(player.ToString())].SkinColor = getSkinColor();
+        players[playerID].SkinColor = getSkinColor();
     }
 
     public void DeletePlayer(int playerID)
