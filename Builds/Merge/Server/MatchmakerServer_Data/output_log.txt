@@ -10,7 +10,7 @@ Platform assembly: C:\Users\Alper\Documents\GitHub\matchmaker\Builds\Merge\Serve
 Loading C:\Users\Alper\Documents\GitHub\matchmaker\Builds\Merge\Server\MatchmakerServer_Data\Managed\UnityEngine.dll into Unity Child Domain
 Platform assembly: C:\Users\Alper\Documents\GitHub\matchmaker\Builds\Merge\Server\MatchmakerServer_Data\Managed\Assembly-CSharp.dll (this message is harmless)
 Loading C:\Users\Alper\Documents\GitHub\matchmaker\Builds\Merge\Server\MatchmakerServer_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-- Completed reload, in  0.042 seconds
+- Completed reload, in  0.036 seconds
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
@@ -22,81 +22,13 @@ desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-[HOST] Player 0 connected from 192.168.0.101:52918
+[HOST] Player 0 connected from 192.168.0.100:58593
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-[HOST] Player 1 connected from 192.168.0.100:54665
+RPC call failed because the function 'SpawnPlayer' in 'GameManager' does not have the RPC attribute. You need to add the RPC attribute in front of the function declaration
  
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-[HOST] Player 2 connected from 192.168.0.101:51735
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-[HOST] Clean up after player 3
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-No objects for the given player ID were deleted 3
- 
-(Filename:  Line: 1373)
-
-[HOST] Player 3 connected from 192.168.0.101:62691
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-[HOST] Clean up after player 4
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-No objects for the given player ID were deleted 4
- 
-(Filename:  Line: 1373)
-
-[HOST] Player 4 connected from 192.168.0.101:62692
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-[HOST] Clean up after player 5
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-No objects for the given player ID were deleted 5
- 
-(Filename:  Line: 1373)
-
-[HOST] Player 5 connected from 192.168.0.101:62693
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-[HOST] Clean up after player 6
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-No objects for the given player ID were deleted 6
- 
-(Filename:  Line: 1373)
-
-A client which was not in the connected player list disconnected. ???
- 
-(Filename:  Line: 1891)
-
-[HOST] Player 6 connected from 192.168.0.101:62697
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-[HOST] Clean up after player 7
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-No objects for the given player ID were deleted 7
- 
-(Filename:  Line: 1373)
-
-[HOST] Player 7 connected from 192.168.0.101:62709
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+(Filename:  Line: 54)
 
 [HOST] Clean up after player 1
  
@@ -106,17 +38,109 @@ No objects for the given player ID were deleted 1
  
 (Filename:  Line: 1373)
 
-[HOST] Player 8 connected from 192.168.0.101:62711
+[HOST] Player 1 connected from 192.168.0.100:58594
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-[HOST] Clean up after player 9
+RPC call failed because the function 'SpawnPlayer' in 'GameManager' does not have the RPC attribute. You need to add the RPC attribute in front of the function declaration
+ 
+(Filename:  Line: 54)
+
+[HOST] Clean up after player 2
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-No objects for the given player ID were deleted 9
+No objects for the given player ID were deleted 2
  
 (Filename:  Line: 1373)
+
+[HOST] Player 2 connected from 192.168.0.100:58595
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+RPC call failed because the function 'SpawnPlayer' in 'GameManager' does not have the RPC attribute. You need to add the RPC attribute in front of the function declaration
+ 
+(Filename:  Line: 54)
+
+[HOST] Clean up after player 3
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+No objects for the given player ID were deleted 3
+ 
+(Filename:  Line: 1373)
+
+[HOST] Player 3 connected from 192.168.0.100:58596
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+RPC call failed because the function 'SpawnPlayer' in 'GameManager' does not have the RPC attribute. You need to add the RPC attribute in front of the function declaration
+ 
+(Filename:  Line: 54)
+
+[HOST] Clean up after player 4
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+No objects for the given player ID were deleted 4
+ 
+(Filename:  Line: 1373)
+
+[HOST] Player 4 connected from 192.168.0.100:58597
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+RPC call failed because the function 'SpawnPlayer' in 'GameManager' does not have the RPC attribute. You need to add the RPC attribute in front of the function declaration
+ 
+(Filename:  Line: 54)
+
+[HOST] Clean up after player 5
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+No objects for the given player ID were deleted 5
+ 
+(Filename:  Line: 1373)
+
+[HOST] Player 5 connected from 192.168.0.100:58598
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+RPC call failed because the function 'SpawnPlayer' in 'GameManager' does not have the RPC attribute. You need to add the RPC attribute in front of the function declaration
+ 
+(Filename:  Line: 54)
+
+[HOST] Clean up after player 6
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+No objects for the given player ID were deleted 6
+ 
+(Filename:  Line: 1373)
+
+[HOST] Player 6 connected from 192.168.0.100:58599
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+RPC call failed because the function 'SpawnPlayer' in 'GameManager' does not have the RPC attribute. You need to add the RPC attribute in front of the function declaration
+ 
+(Filename:  Line: 54)
+
+[HOST] Clean up after player 7
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+No objects for the given player ID were deleted 7
+ 
+(Filename:  Line: 1373)
+
+[HOST] Player 7 connected from 192.168.0.100:58600
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+RPC call failed because the function 'SpawnPlayer' in 'GameManager' does not have the RPC attribute. You need to add the RPC attribute in front of the function declaration
+ 
+(Filename:  Line: 54)
 
 [HOST] Clean up after player 8
  
@@ -126,34 +150,85 @@ No objects for the given player ID were deleted 8
  
 (Filename:  Line: 1373)
 
-Internal error while attempting to connect to master server
-
- 
-(Filename:  Line: 160)
-
-[HOST] Could not connect to master server: InternalDirectConnectFailed
+[HOST] Player 8 connected from 192.168.0.100:58601
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-[HOST] Attempting to initialize the server..
+RPC call failed because the function 'SpawnPlayer' in 'GameManager' does not have the RPC attribute. You need to add the RPC attribute in front of the function declaration
+ 
+(Filename:  Line: 54)
+
+[HOST] Clean up after player 9
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-Local server connection disconnected
+No objects for the given player ID were deleted 9
+ 
+(Filename:  Line: 1373)
+
+[HOST] Player 9 connected from 192.168.0.100:58602
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-[HOST] Server initialized successfully.
+RPC call failed because the function 'SpawnPlayer' in 'GameManager' does not have the RPC attribute. You need to add the RPC attribute in front of the function declaration
+ 
+(Filename:  Line: 54)
+
+[HOST] Clean up after player 10
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
 
-Failed to connect to 67.225.180.24:50005 because this system is already connected. This can occur when the network connection is disconnected too quickly for the remote system to receive the disconnect notification, for example when using Network.Disconnect(0).
+No objects for the given player ID were deleted 10
  
-(Filename:  Line: 2463)
+(Filename:  Line: 1373)
 
-Could not connect to server: AlreadyConnectedToServer
+[HOST] Player 10 connected from 192.168.0.100:58603
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+RPC call failed because the function 'SpawnPlayer' in 'GameManager' does not have the RPC attribute. You need to add the RPC attribute in front of the function declaration
+ 
+(Filename:  Line: 54)
+
+[HOST] Clean up after player 11
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+No objects for the given player ID were deleted 11
+ 
+(Filename:  Line: 1373)
+
+[HOST] Player 11 connected from 192.168.0.100:58604
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+RPC call failed because the function 'SpawnPlayer' in 'GameManager' does not have the RPC attribute. You need to add the RPC attribute in front of the function declaration
+ 
+(Filename:  Line: 54)
+
+[HOST] Clean up after player 12
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+No objects for the given player ID were deleted 12
+ 
+(Filename:  Line: 1373)
+
+[HOST] Player 12 connected from 192.168.0.100:58605
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+RPC call failed because the function 'SpawnPlayer' in 'GameManager' does not have the RPC attribute. You need to add the RPC attribute in front of the function declaration
+ 
+(Filename:  Line: 54)
+
+[HOST] Clean up after player 13
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+No objects for the given player ID were deleted 13
+ 
+(Filename:  Line: 1373)
 
 Local server connection disconnected
  

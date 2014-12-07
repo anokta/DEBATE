@@ -10,13 +10,17 @@ Platform assembly: C:\Users\Alper\Documents\GitHub\matchmaker\Builds\Merge\Clien
 Loading C:\Users\Alper\Documents\GitHub\matchmaker\Builds\Merge\Client\MatchmakerClient_Data\Managed\UnityEngine.dll into Unity Child Domain
 Platform assembly: C:\Users\Alper\Documents\GitHub\matchmaker\Builds\Merge\Client\MatchmakerClient_Data\Managed\Assembly-CSharp.dll (this message is harmless)
 Loading C:\Users\Alper\Documents\GitHub\matchmaker\Builds\Merge\Client\MatchmakerClient_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-- Completed reload, in  0.043 seconds
+- Completed reload, in  0.037 seconds
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 Connected to server
  
 (Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+The server has disconnected from the client. Most likely the server has shut down.
+ 
+(Filename:  Line: 745)
 
 Successfully diconnected from the server
  

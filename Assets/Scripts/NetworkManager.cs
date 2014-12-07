@@ -121,7 +121,7 @@ public class NetworkManager : MonoBehaviour
     {
         Debug.Log("[HOST] Player " + playerCount++ + " connected from " + player.ipAddress + ":" + player.port);
 
-        gameManager.SpawnPlayer(int.Parse(player.ToString()));
+        gameManager.SpawnPlayer(player);
     }
 
     void OnConnectedToServer()

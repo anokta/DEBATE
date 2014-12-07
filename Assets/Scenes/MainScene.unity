@@ -110,7 +110,7 @@ MonoBehaviour:
   gameName: MatchmakerMain
   connections: 128
   port: 25005
-  isHost: 1
+  isHost: 0
 --- !u!4 &1028870449
 Transform:
   m_ObjectHideFlags: 0
