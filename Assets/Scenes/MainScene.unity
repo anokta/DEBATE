@@ -157,11 +157,11 @@ GUIText:
   m_TabSize: 4
   m_Font: {fileID: 12800000, guid: f59133d6cbd64fa41aad1202fbbf7c00, type: 3}
   m_Material: {fileID: 0}
-  m_FontSize: 12
+  m_FontSize: 14
   m_FontStyle: 2
   m_Color:
     serializedVersion: 2
-    rgba: 1076899943
+    rgba: 704972092
   m_PixelCorrect: 1
   m_RichText: 1
 --- !u!4 &415028116
@@ -332,11 +332,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   masterPort: 23466
   masterIP: 54.174.144.122
-  gameTypeName: MatchmakerLD31
-  gameName: MatchmakerMain
+  gameTypeName: DebateLD31
+  gameName: DebateMain
   connections: 128
   port: 25005
-  isHost: 0
+  isHost: 1
   waitInterval: 4
 --- !u!4 &1028870449
 Transform:
@@ -575,7 +575,7 @@ Transform:
   m_GameObject: {fileID: 1330273725}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -50, z: 0}
-  m_LocalScale: {x: 100, y: 100, z: 1}
+  m_LocalScale: {x: 50, y: 100, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -617,6 +617,18 @@ Prefab:
     - target: {fileID: 400000, guid: 121673f2cab62bf42b653357206a6ca9, type: 2}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 121673f2cab62bf42b653357206a6ca9, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 121673f2cab62bf42b653357206a6ca9, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 121673f2cab62bf42b653357206a6ca9, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 121673f2cab62bf42b653357206a6ca9, type: 2}
@@ -683,7 +695,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 6
+  orthographic size: 19
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

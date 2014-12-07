@@ -19,8 +19,8 @@ public class LonerController : MonoBehaviour
     const int MAX_SHOUT = 7;
 
     const float MAX_PUSH = 1000.0f;
-    const float MIN_ANGER = 125.0f;
-    const float MAX_ANGER = 500.0f;
+    const float MIN_ANGER = 150.0f;
+    const float MAX_ANGER = 400.0f;
 
     const float UNIT_ANGER = 0.05f;
 
@@ -40,7 +40,7 @@ public class LonerController : MonoBehaviour
     public float Anger
     {
         get { return anger; }
-        set { anger = Mathf.Min(1.0f, Mathf.Max(0.0f, value)); targetColor = new Color(anger * 1.0f + skinColor.r, -anger * 0.6f + skinColor.g, -anger * 0.6f + skinColor.b); }
+        set { anger = Mathf.Max(0.0f, value); targetColor = new Color(anger * 1.0f + skinColor.r, -anger * 0.6f + skinColor.g, -anger * 0.6f + skinColor.b); }
     }
 
     void Awake()
@@ -75,6 +75,16 @@ public class LonerController : MonoBehaviour
             if (Network.isServer)
             {
                 Anger -= 2.0f * UNIT_ANGER * Time.deltaTime;
+
+                if (transform.position.y < 0.0f)
+                {
+                    voice = Mathf.FloorToInt(7.0f * transform.position.y);
+
+                    if (transform.position.y < -10.0f)
+                    {
+                        networkView.RPC("Die", RPCMode.Others, playerID);
+                    }
+                }
             }
         } 
         
@@ -88,7 +98,7 @@ public class LonerController : MonoBehaviour
             {
                 if (myID == playerID)
                 {
-                    Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, 6.0f - 4.0f * anger, 2 * Time.deltaTime);
+                    Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, anger > 0.0f ? 15.0f - 13.0f * anger * anger : 19.0f, 2 * Time.deltaTime);
                 }
 
                 currentColor = Color.Lerp(currentColor, targetColor, 2.5f * Time.deltaTime);
@@ -103,7 +113,9 @@ public class LonerController : MonoBehaviour
             if (myID == playerID) // && Camera.main.transform.position != transform.position - Vector3.forward * 5.0f)
             {
                 Vector3 vel = Vector3.zero;
-                Camera.main.transform.position = Vector3.SmoothDamp(Camera.main.transform.position, transform.position + new Vector3(0.0f, 1.0f, -5.0f), ref vel, 1.75f * Camera.main.orthographicSize * Time.smoothDeltaTime);
+                Vector3 target = new Vector3(0.0f, 1.0f, -5.0f);
+
+                Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, anger > 0.0f ? target + transform.position : target, Time.deltaTime);
             }
 
             if (transform.position != targetPosition)
@@ -133,16 +145,16 @@ public class LonerController : MonoBehaviour
         shoutLength = Random.Range(MIN_SHOUT, MAX_SHOUT);
 
         // Check encounters
-        RaycastHit[] rights = Physics.RaycastAll(transform.position, Vector3.right, Mathf.Max(1.0f, 2.0f * anger));
-        RaycastHit[] lefts = Physics.RaycastAll(transform.position, Vector3.left, Mathf.Max(1.0f, 2.0f * anger));
+        RaycastHit[] rights = Physics.RaycastAll(transform.position, Vector3.right, Mathf.Max(1.0f, 1.5f * anger));
+        RaycastHit[] lefts = Physics.RaycastAll(transform.position, Vector3.left, Mathf.Max(1.0f, 1.5f * anger));
 
         if (rights.Length + lefts.Length == 0)
         {
-            Anger += 1.5f * UNIT_ANGER;
+            Anger += UNIT_ANGER;
 
             if(Anger > 1.0f)
             {
-                Debug.Log(Network.player.guid + " died.");
+                networkView.RPC("Die", RPCMode.Others, playerID);
             }
         }
 
@@ -158,7 +170,7 @@ public class LonerController : MonoBehaviour
 
                 if (victim.Anger > 1.0f)
                 {
-                    Debug.Log(" died.");
+                    networkView.RPC("Die", RPCMode.Others, victim.PlayerID);
                 }
             }
         }
@@ -173,7 +185,7 @@ public class LonerController : MonoBehaviour
 
                 if(victim.Anger > 1.0f)
                 {
-                    Debug.Log(" died.");
+                    networkView.RPC("Die", RPCMode.Others, victim.PlayerID);
                 }
             }
         }
@@ -233,6 +245,15 @@ public class LonerController : MonoBehaviour
             int scaleOffset = index - octaveOffset * CurrentScale.Length;
 
             return Mathf.Pow(1.05f, CurrentScale[scaleOffset] + octaveOffset * OCTAVE);
+        }
+    }
+
+    [RPC]
+    void Die(int id)
+    {
+        if (int.Parse(Network.player.ToString()) == id)
+        {
+            Network.Disconnect();
         }
     }
 }

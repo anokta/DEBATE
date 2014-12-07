@@ -30,10 +30,10 @@ public class NetworkManager : MonoBehaviour
         MasterServer.dedicatedServer = true;
 
         PlayerCount = 0;
-        serverInitialized = false;
-        elapsed = -waitInterval;
 
         gameManager = GetComponent<GameManager>();
+
+        GameEventManager.GameMenu += GameMenu;
     }
 
     void Update()
@@ -73,10 +73,19 @@ public class NetworkManager : MonoBehaviour
 
     void OnDestroy()
     {
+        GameEventManager.GameMenu -= GameMenu;
+
         Network.Disconnect();
 
         Debug.Log("Disconnected.");
     }
+
+    void GameMenu()
+    {
+        serverInitialized = false;
+        elapsed = -waitInterval;
+    }
+
     void OnServerInitialized()
     {
         serverInitialized = true;

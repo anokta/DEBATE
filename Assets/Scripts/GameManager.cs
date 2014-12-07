@@ -45,6 +45,12 @@ public class GameManager : MonoBehaviour {
                         Network.Disconnect();
                     }
                     break;
+                case GameEventManager.GameState.Over:
+                    if (!Network.isClient && Input.GetKeyDown(KeyCode.Space))
+                    {
+                        GameEventManager.TriggerGameMenu();
+                    }
+                    break;
             }
 
             if (noise.volume != targetVolume)
@@ -61,7 +67,6 @@ public class GameManager : MonoBehaviour {
 
     void GameMenu()
     {
-        Debug.Log(1.0f / Time.deltaTime);
         targetVolume = 0.0f;
     }
 
@@ -79,7 +84,7 @@ public class GameManager : MonoBehaviour {
 
     Vector3 getPlayerSpawnPosition()
     {
-        return new Vector3(Random.Range(-4 * NetworkManager.PlayerCount, 4 * NetworkManager.PlayerCount), 0, 0);
+        return new Vector3(Random.Range(-2 * NetworkManager.PlayerCount, 2 * NetworkManager.PlayerCount), 1.0f, 0.0f);
     }
 
     Color getSkinColor()
