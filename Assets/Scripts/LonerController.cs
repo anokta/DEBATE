@@ -57,7 +57,7 @@ public class LonerController : MonoBehaviour
 
                 shoutCurrent++;
 
-                rigidbody.AddForce(new Vector3(Random.Range(-0.15f, 0.15f), 1.0f, 0.0f) * (45 + Mathf.Min(0.5f, anger) * 10));
+                rigidbody.AddForce(new Vector3(Random.Range(-0.15f, 0.15f), 1.0f, 0.0f) * (40 + Mathf.Min(0.5f, anger) * 10));
             }
             else
             {
@@ -94,9 +94,11 @@ public class LonerController : MonoBehaviour
 
     public void Interact()
     {
+        // Restart shout
         shoutCurrent = 0;
         shoutLength = Random.Range(MIN_SHOUT, MAX_SHOUT);
 
+        // Check encounters
         RaycastHit[] rights = Physics.RaycastAll(transform.position, Vector3.right, Mathf.Max(1.0f, 2.0f * anger));
         RaycastHit[] lefts = Physics.RaycastAll(transform.position, Vector3.left, Mathf.Max(1.0f, 2.0f * anger));
 
@@ -104,6 +106,7 @@ public class LonerController : MonoBehaviour
         {
             Anger += 1.5f * UNIT_ANGER;
         }
+
         foreach (RaycastHit hit in rights)
         {
             if (hit.transform.tag.Equals("Player"))
@@ -158,22 +161,7 @@ public class LonerController : MonoBehaviour
 
     static class MusicalProperties
     {
-        enum MusicalScale
-        {
-            MAJOR = 0, HARMONIC_MINOR = 1, NATURAL_MINOR = 2
-        }
-
-        static float[] majorScale = { 0, 2, 4, 5, 7, 9, 11 };
-        static float[] harmonicMinorScale = { 0, 2, 3, 5, 7, 8, 11 };
-        static float[] naturalMinorScale = { 0, 2, 3, 5, 7, 8, 10 };
-        static Dictionary<MusicalScale, float[]> Scales = new Dictionary<MusicalScale, float[]>()
-        {
-            { MusicalScale.MAJOR, majorScale },
-            { MusicalScale.HARMONIC_MINOR, harmonicMinorScale },
-            { MusicalScale.NATURAL_MINOR, naturalMinorScale }
-        };
-
-        public static float[] CurrentScale = Scales[MusicalScale.MAJOR];
+        public static float[] CurrentScale = { 0, 2, 4, 5, 7, 9, 11 };
 
         const int OCTAVE = 12;
 
@@ -185,7 +173,6 @@ public class LonerController : MonoBehaviour
             int scaleOffset = index - octaveOffset * CurrentScale.Length;
 
             return Mathf.Pow(1.05f, CurrentScale[scaleOffset] + octaveOffset * OCTAVE);
-
         }
     }
 }

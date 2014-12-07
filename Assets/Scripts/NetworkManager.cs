@@ -14,6 +14,9 @@ public class NetworkManager : MonoBehaviour
 
     public bool isHost = false;
 
+    public float waitInterval = 5.0f;
+    float elapsed;
+
     int playerCount;
     bool serverInitialized;
 
@@ -27,15 +30,20 @@ public class NetworkManager : MonoBehaviour
 
         playerCount = 0;
         serverInitialized = false;
+        elapsed = -waitInterval;
 
         gameManager = GetComponent<GameManager>();
     }
 
     void Update()
     {
-        if(isHost)
+        if (!serverInitialized && Time.time - elapsed > waitInterval)
         {
-            if (!serverInitialized)
+            Debug.Log("Connecting..");
+
+            elapsed = Time.time; 
+
+            if (isHost)
             {
                 Debug.Log("[HOST] Attempting to initialize the server..");
 
@@ -44,45 +52,20 @@ public class NetworkManager : MonoBehaviour
 
                 MasterServer.RegisterHost(gameTypeName, gameName);
             }
-        }
-    }
-
-
-    void OnGUI()
-    {
-        if (!isHost)
-        {
-            if (GUILayout.Button("Join"))
+            else
             {
                 MasterServer.RequestHostList(gameTypeName);
-            }
 
-            HostData[] data = MasterServer.PollHostList();
-
-            // Go through all the hosts in the host list
-            foreach (HostData element in data)
-            {
-                GUILayout.BeginHorizontal();
-                var name = element.gameName + " " + element.connectedPlayers + " / " + element.playerLimit;
-                GUILayout.Label(name);
-                GUILayout.Space(5);
-                string hostInfo;
-                hostInfo = "[";
-
-                foreach (string host in element.ip)
-                    hostInfo = hostInfo + host + ":" + element.port + " ";
-                hostInfo = hostInfo + "]";
-                GUILayout.Label(hostInfo);
-                GUILayout.Space(5);
-                GUILayout.Label(element.comment);
-                GUILayout.Space(5);
-                GUILayout.FlexibleSpace();
-                if (GUILayout.Button("Connect"))
+                HostData[] data = MasterServer.PollHostList();
+                foreach (HostData element in data)
                 {
-                    // Connect to HostData struct, internally the correct method is used (GUID when using NAT).
-                    Network.Connect(element);
+                    Debug.Log("Attemting to connect to the server..");
+
+                    if (element.gameName.Equals(gameName))
+                    {
+                        Network.Connect(element);
+                    }
                 }
-                GUILayout.EndHorizontal();
             }
         }
     }
@@ -116,11 +99,15 @@ public class NetworkManager : MonoBehaviour
         Network.RemoveRPCsInGroup(playerID);
 
         gameManager.DeletePlayer(playerID);
+
+        playerCount--;
     }
 
     void OnPlayerConnected(NetworkPlayer player)
     {
-        Debug.Log("[HOST] Player " + playerCount++ + " connected from " + player.ipAddress + ":" + player.port);
+        playerCount++;
+
+        Debug.Log("[HOST] Player " + playerCount + " connected from " + player.ipAddress + ":" + player.port);
 
         gameManager.SpawnPlayer(int.Parse(player.ToString()));
     }
@@ -128,6 +115,10 @@ public class NetworkManager : MonoBehaviour
     void OnConnectedToServer()
     {
         Debug.Log("Connected to server");
+
+        serverInitialized = true;
+
+        GameEventManager.TriggerGameStart();
     }
 
     void OnDisconnectedFromServer(NetworkDisconnection info)
@@ -146,5 +137,7 @@ public class NetworkManager : MonoBehaviour
     void OnFailedToConnect(NetworkConnectionError error)
     {
         Debug.Log("Could not connect to server: " + error);
-    }
+
+        serverInitialized = false;
+     }
 }

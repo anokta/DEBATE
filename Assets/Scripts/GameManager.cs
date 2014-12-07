@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour {
 
     AudioSource noise;
     public float noiseVolume;
+    float targetVolume;
 
     void Awake()
     {
@@ -27,9 +28,28 @@ public class GameManager : MonoBehaviour {
 
     void Update()
     {
-        float targetVolume =  GameEventManager.CurrentState == GameEventManager.GameState.Running ? noiseVolume : 0.0f;
-        if (noise.volume != targetVolume)
-            noise.volume = Mathf.Lerp(noise.volume, targetVolume, Time.deltaTime);
+        if (!Network.isServer)
+        {
+            switch(GameEventManager.CurrentState)
+            {
+                case GameEventManager.GameState.InMenu:
+                    if (Input.GetKeyDown(KeyCode.Escape))
+                    {
+                        GameEventManager.TriggerGameQuit();
+                    }
+                    break;
+
+                case GameEventManager.GameState.Running:
+                    if (Input.GetKeyDown(KeyCode.Escape))
+                    {
+                        Network.Disconnect();
+                    }
+                    break;
+            }
+
+            if (noise.volume != targetVolume)
+                noise.volume = Mathf.Lerp(noise.volume, targetVolume, Time.deltaTime);
+        }
     }
 
     void OnDestroy()
@@ -41,12 +61,12 @@ public class GameManager : MonoBehaviour {
 
     void GameMenu()
     {
-
+        targetVolume = 0.0f;
     }
 
     void GameStart()
     {
-
+        targetVolume = noiseVolume;
     }
 
     void GameOver()

@@ -27,18 +27,22 @@ public class GUIManager : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	    if(currentAlpha != targetAlpha)
+    void Update()
+    {
+        if (!Network.isServer)
         {
-            currentAlpha = Mathf.Lerp(currentAlpha, targetAlpha, 2 * Time.deltaTime);
+            if (currentAlpha != targetAlpha)
+            {
+                currentAlpha = Mathf.Lerp(currentAlpha, targetAlpha, 2 * Time.deltaTime);
+            }
+
+            Color c = welcome.color;
+            c.a = currentAlpha;
+
+            welcome.color = c;
+            title.color = c;
         }
-
-        Color c = welcome.color;
-        c.a = currentAlpha;
-
-        welcome.color = c;
-        title.color = c;
-	}
+    }
 
     void GameMenu()
     {
@@ -47,7 +51,7 @@ public class GUIManager : MonoBehaviour {
 
     void GameStart()
     {
-
+        targetAlpha = 0.0f;
     }
 
     void GameOver()
