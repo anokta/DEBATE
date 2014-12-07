@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class LonerController : MonoBehaviour
 {
     public float speed, acceleration;
+    public int voice;
 
     const int MIN_SHOUT = 3;
     const int MAX_SHOUT = 7;
@@ -36,13 +37,14 @@ public class LonerController : MonoBehaviour
 
         anger = 0.0f;
         currentColor = targetColor = Color.white;
+        voice = 0;
     }
 
     void Update()
     {
         if (shoutCurrent < shoutLength && !sample.isPlaying)
         {
-            sample.pitch = MusicalProperties.GetRandomPitch();
+            sample.pitch = MusicalProperties.GetRandomPitch(voice);
             sample.Play();
 
             shoutCurrent++;
@@ -108,6 +110,8 @@ public class LonerController : MonoBehaviour
 
             float r = targetColor.r, g = targetColor.g, b = targetColor.b;
             stream.Serialize(ref r); stream.Serialize(ref g); stream.Serialize(ref b);
+
+            stream.Serialize(ref voice);
         }
         else
         {
@@ -122,6 +126,8 @@ public class LonerController : MonoBehaviour
             float r = currentColor.r, g = currentColor.g, b = currentColor.b;
             stream.Serialize(ref r); stream.Serialize(ref g); stream.Serialize(ref b);
             targetColor = new Color(r, g, b);
+
+            stream.Serialize(ref voice);
         }
     }
 
@@ -144,11 +150,17 @@ public class LonerController : MonoBehaviour
 
         public static float[] CurrentScale = Scales[MusicalScale.MAJOR];
 
-        public static float GetRandomPitch()
-        {
-            int index = Random.Range(0, CurrentScale.Length);
+        const int OCTAVE = 12;
 
-            return Mathf.Pow(1.05f, CurrentScale[index]);
+        public static float GetRandomPitch(int voice)
+        {
+            int index = voice + Random.Range(0, CurrentScale.Length);
+
+            int octaveOffset = Mathf.FloorToInt((float)index / CurrentScale.Length);
+            int scaleOffset = index - octaveOffset * CurrentScale.Length;
+
+            return Mathf.Pow(1.05f, CurrentScale[scaleOffset] + octaveOffset * OCTAVE);
+
         }
     }
 }

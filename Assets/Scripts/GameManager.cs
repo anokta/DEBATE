@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour {
         players[playerID] = ((GameObject)Network.Instantiate(playerPrefab, getPlayerSpawnPosition(), Quaternion.identity, playerID)).GetComponent<LonerController>();
             
         players[playerID].SkinColor = getSkinColor();
+        players[playerID].voice = Random.Range(-5, 3);
     }
 
     public void DeletePlayer(int playerID)
