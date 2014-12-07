@@ -139,6 +139,8 @@ public class NetworkManager : MonoBehaviour
                 Debug.Log("Lost connection to the server");
             else
                 Debug.Log("Successfully diconnected from the server");
+
+        GameEventManager.TriggerGameOver();
     }
 
     void OnFailedToConnect(NetworkConnectionError error)

@@ -11,8 +11,12 @@ public class LonerController : MonoBehaviour
     const int MAX_SHOUT = 7;
 
     const float MAX_PUSH = 1000.0f;
-    const float MIN_ANGER = 100.0f;
-    const float MAX_ANGER = 250.0f;
+    const float MIN_ANGER = 125.0f;
+    const float MAX_ANGER = 500.0f;
+
+    const float UNIT_ANGER = 0.05f;
+
+    Vector3 targetPosition;
 
     AudioSource sample;
     int shoutLength, shoutCurrent;
@@ -27,7 +31,7 @@ public class LonerController : MonoBehaviour
     public float Anger
     {
         get { return anger; }
-        set { anger = Mathf.Min(1.0f, Mathf.Max(0.0f, value)); targetColor = new Color(anger * 1.0f + skinColor.r, -anger * 0.25f + skinColor.g, -anger * 0.4f + skinColor.b); }
+        set { anger = Mathf.Min(1.0f, Mathf.Max(0.0f, value)); targetColor = new Color(anger * 1.0f + skinColor.r, -anger * 0.6f + skinColor.g, -anger * 0.6f + skinColor.b); }
     }
 
     void Awake()
@@ -36,24 +40,49 @@ public class LonerController : MonoBehaviour
         shoutLength = shoutCurrent = 0;
 
         anger = 0.0f;
-        currentColor = targetColor = Color.white;
+        skinColor = currentColor = targetColor = Color.white;
         voice = 0;
+
+        targetPosition = transform.position;
     }
 
     void Update()
     {
-        if (shoutCurrent < shoutLength && !sample.isPlaying)
+        if (Network.isServer)
         {
-            sample.pitch = MusicalProperties.GetRandomPitch(voice);
-            sample.Play();
+            if (shoutCurrent < shoutLength && !sample.isPlaying)
+            {
+                sample.pitch = MusicalProperties.GetRandomPitch(voice);
+                sample.Play();
 
-            shoutCurrent++;
+                shoutCurrent++;
+
+                rigidbody.AddForce(new Vector3(Random.Range(-0.15f, 0.15f), 1.0f, 0.0f) * (45 + Mathf.Min(0.5f, anger) * 10));
+            }
+            else
+            {
+                Anger -= 2.0f * UNIT_ANGER * Time.deltaTime;
+            }
         }
-
-        if(currentColor != targetColor)
+        else
         {
-            currentColor = Color.Lerp(currentColor, targetColor, 4 * Time.deltaTime);
-            renderer.material.color = currentColor;
+            if (currentColor != targetColor)
+            {
+                currentColor = Color.Lerp(currentColor, targetColor, 2.5f * Time.deltaTime);
+                renderer.material.color = currentColor;
+            }
+
+            if (transform.position != targetPosition)
+            {
+                if (Vector3.Distance(transform.position, targetPosition) < 0.01f)
+                {
+                    transform.position = targetPosition;
+                }
+                else
+                {
+                    transform.position = Vector3.Lerp(transform.position, targetPosition, 6.0f * Time.deltaTime);
+                }
+            }
         }
     }
 
@@ -73,14 +102,14 @@ public class LonerController : MonoBehaviour
 
         if (rights.Length + lefts.Length == 0)
         {
-            Anger -= 0.1f;
+            Anger += 1.5f * UNIT_ANGER;
         }
         foreach (RaycastHit hit in rights)
         {
             if (hit.transform.tag.Equals("Player"))
             {
-                Anger -= 0.05f;
-                hit.transform.gameObject.GetComponent<LonerController>().Anger += 0.1f;
+                Anger -= 1.25f * UNIT_ANGER;
+                hit.transform.gameObject.GetComponent<LonerController>().Anger += 2.5f * UNIT_ANGER;
                 hit.rigidbody.AddForce(Mathf.Min(MAX_PUSH, 1.0f / hit.distance * Mathf.Max(MIN_ANGER, anger * MAX_ANGER)) * Vector3.right);
             }
         }
@@ -88,8 +117,8 @@ public class LonerController : MonoBehaviour
         {
             if (hit.transform.tag.Equals("Player"))
             {
-                Anger -= 0.05f;
-                hit.transform.gameObject.GetComponent<LonerController>().Anger += 0.1f;
+                Anger -= 1.25f * UNIT_ANGER;
+                hit.transform.gameObject.GetComponent<LonerController>().Anger += 2.5f * UNIT_ANGER;
                 hit.rigidbody.AddForce(Mathf.Min(MAX_PUSH, 1.0f / hit.distance * Mathf.Max(MIN_ANGER, anger * MAX_ANGER)) * Vector3.left);
             }
         }
@@ -106,28 +135,24 @@ public class LonerController : MonoBehaviour
             stream.Serialize(ref shoutCurrent);
             stream.Serialize(ref shoutLength);
 
-            stream.Serialize(ref anger);
+            stream.Serialize(ref voice);
 
             float r = targetColor.r, g = targetColor.g, b = targetColor.b;
             stream.Serialize(ref r); stream.Serialize(ref g); stream.Serialize(ref b);
-
-            stream.Serialize(ref voice);
         }
         else
         {
             stream.Serialize(ref position);
-            transform.position = Vector3.Lerp(transform.position, position, 0.5f);
+            targetPosition = position;
 
             stream.Serialize(ref shoutCurrent);
             stream.Serialize(ref shoutLength);
 
-            stream.Serialize(ref anger);
+            stream.Serialize(ref voice);
 
-            float r = currentColor.r, g = currentColor.g, b = currentColor.b;
+            float r = targetColor.r, g = targetColor.g, b = targetColor.b;
             stream.Serialize(ref r); stream.Serialize(ref g); stream.Serialize(ref b);
             targetColor = new Color(r, g, b);
-
-            stream.Serialize(ref voice);
         }
     }
 

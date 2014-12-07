@@ -110,7 +110,7 @@ GUIText:
   m_FontStyle: 1
   m_Color:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 16777215
   m_PixelCorrect: 1
   m_RichText: 1
 --- !u!4 &286532155
@@ -241,7 +241,7 @@ GUIText:
   m_FontStyle: 0
   m_Color:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 16777215
   m_PixelCorrect: 1
   m_RichText: 1
 --- !u!4 &961851297
@@ -264,6 +264,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 995526780}
+  - 114: {fileID: 995526781}
   m_Layer: 0
   m_Name: GUI
   m_TagString: Untagged
@@ -285,6 +286,19 @@ Transform:
   - {fileID: 415028116}
   m_Father: {fileID: 0}
   m_RootOrder: 4
+--- !u!114 &995526781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 995526779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f861c24a79a6e498582a6fb2bd4b79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  welcome: {fileID: 961851296}
+  title: {fileID: 286532154}
 --- !u!1 &1028870447
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,6 +384,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 100000, guid: e31dfdc921fc92c4489b525f5f576e24, type: 2}
+  noiseVolume: .200000003
 --- !u!82 &1028870453
 AudioSource:
   m_ObjectHideFlags: 0
@@ -378,9 +393,9 @@ AudioSource:
   m_GameObject: {fileID: 1028870447}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: 095120eecd600444299b80cf26334851, type: 3}
+  m_audioClip: {fileID: 8300000, guid: c7e2800b5da04b14ea63dacd5824d069, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: .00999999978
+  m_Volume: 0
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -607,6 +622,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
+--- !u!1 &1370135710
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1370135711}
+  m_Layer: 0
+  m_Name: Players
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1370135711
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1370135710}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -500, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
 --- !u!1 &2122913206
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,9 +7,53 @@ public class GameManager : MonoBehaviour {
     public GameObject playerPrefab;
     Dictionary<int, LonerController> players;
 
+    AudioSource noise;
+    public float noiseVolume;
+
     void Awake()
     {
         players = new Dictionary<int, LonerController>();
+        noise = GetComponent<AudioSource>();
+
+        GameEventManager.GameMenu += GameMenu;
+        GameEventManager.GameStart += GameStart;
+        GameEventManager.GameOver += GameOver;
+    }
+
+    void Start()
+    {
+        GameEventManager.TriggerGameMenu();
+    }
+
+    void Update()
+    {
+        float targetVolume =  GameEventManager.CurrentState == GameEventManager.GameState.Running ? noiseVolume : 0.0f;
+        if (noise.volume != targetVolume)
+            noise.volume = Mathf.Lerp(noise.volume, targetVolume, Time.deltaTime);
+    }
+
+    void OnDestroy()
+    {
+        GameEventManager.GameMenu -= GameMenu;
+        GameEventManager.GameStart -= GameStart;
+        GameEventManager.GameOver -= GameOver;
+    }
+
+    void GameMenu()
+    {
+
+    }
+
+    void GameStart()
+    {
+
+    }
+
+    void GameOver()
+    {
+        LonerController[] players = FindObjectsOfType<LonerController>();
+        foreach (LonerController loner in players)
+            Destroy(loner.gameObject);
     }
 
     Vector3 getPlayerSpawnPosition()
@@ -32,7 +76,7 @@ public class GameManager : MonoBehaviour {
     public void SpawnPlayer(int playerID)
     {
         players[playerID] = ((GameObject)Network.Instantiate(playerPrefab, getPlayerSpawnPosition(), Quaternion.identity, playerID)).GetComponent<LonerController>();
-            
+
         players[playerID].SkinColor = getSkinColor();
         players[playerID].voice = Random.Range(-5, 3);
     }
