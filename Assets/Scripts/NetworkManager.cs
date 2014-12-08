@@ -38,7 +38,7 @@ public class NetworkManager : MonoBehaviour
 
     void Update()
     {
-        if (!serverInitialized && Time.time - elapsed > waitInterval)
+        if ((!Network.isServer || !serverInitialized) && Time.time - elapsed > waitInterval)
         {
             Debug.Log("Connecting..");
 
@@ -53,7 +53,7 @@ public class NetworkManager : MonoBehaviour
 
                 MasterServer.RegisterHost(gameTypeName, gameName);
             }
-            else
+            else if(!serverInitialized)
             {
                 MasterServer.RequestHostList(gameTypeName);
 
@@ -89,6 +89,7 @@ public class NetworkManager : MonoBehaviour
     void OnServerInitialized()
     {
         serverInitialized = true;
+        PlayerCount = 0;
 
         Debug.Log("[HOST] Server initialized successfully.");
     }

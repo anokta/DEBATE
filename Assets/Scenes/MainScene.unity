@@ -471,7 +471,7 @@ MonoBehaviour:
   masterIP: 54.174.144.122
   gameTypeName: DebateLD31
   gameName: DebateMain
-  connections: 64
+  connections: 16
   port: 25005
   isHost: 1
   waitInterval: 3
