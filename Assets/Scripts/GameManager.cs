@@ -89,11 +89,13 @@ public class GameManager : MonoBehaviour {
         LonerController[] players = FindObjectsOfType<LonerController>();
         foreach (LonerController loner in players)
             Destroy(loner.gameObject);
+
+        LogManager.Logs.Clear();
     }
 
     Vector3 getPlayerSpawnPosition()
     {
-        return new Vector3(Mathf.Min(15.0f, Mathf.Max(-15.0f, Random.Range(-5 * NetworkManager.PlayerCount, 5 * NetworkManager.PlayerCount))), 2.0f, 0.0f);
+        return new Vector3(Mathf.Min(15.0f, Mathf.Max(-15.0f, Random.Range(-5.0f * NetworkManager.PlayerCount, 5.0f * NetworkManager.PlayerCount))), 2.0f, 0.0f);
     }
 
     Color getSkinColor()
@@ -114,6 +116,8 @@ public class GameManager : MonoBehaviour {
         players[playerID].PlayerID = playerID;
         players[playerID].SkinColor = getSkinColor();
         players[playerID].voice = Random.Range(-5, 3);
+
+        networkView.RPC("AddLog", RPCMode.All, "Candidate #" + playerID + " joined the DEBATE");
     }
 
     public void DeletePlayer(int playerID)
@@ -121,6 +125,8 @@ public class GameManager : MonoBehaviour {
         Network.Destroy(players[playerID].gameObject);
 
         players[playerID] = null;
+
+        networkView.RPC("AddLog", RPCMode.All, "Candidate #" + playerID + " left the DEBATE");
     }
 
     [RPC]

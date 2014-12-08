@@ -43,6 +43,10 @@ public class LonerController : MonoBehaviour
         set { anger = Mathf.Max(0.0f, value); targetColor = new Color(anger * 1.0f + skinColor.r, -anger * 0.6f + skinColor.g, -anger * 0.6f + skinColor.b); }
     }
 
+    GameManager gameManager;
+
+    bool isDead;
+
     void Awake()
     {
         sample = GetComponent<AudioSource>();
@@ -57,6 +61,10 @@ public class LonerController : MonoBehaviour
         chorus = GetComponent<AudioChorusFilter>();
 
         label = GetComponentInChildren<TextMesh>();
+
+        gameManager = FindObjectOfType<GameManager>();
+
+        isDead = false;
     }
 
     void Update()
@@ -80,8 +88,10 @@ public class LonerController : MonoBehaviour
                 {
                     voice = Mathf.FloorToInt(7.0f * transform.position.y);
 
-                    if (transform.position.y < -10.0f)
+                    if (!isDead && transform.position.y < -10.0f)
                     {
+                        isDead = true;
+                        gameManager.networkView.RPC("AddLog", RPCMode.Others, "Candidate #" + playerID + "rather died than to argue");
                         networkView.RPC("Die", RPCMode.Others, playerID);
                     }
                 }
@@ -145,8 +155,8 @@ public class LonerController : MonoBehaviour
         shoutLength = Random.Range(MIN_SHOUT, MAX_SHOUT);
 
         // Check encounters
-        RaycastHit[] rights = Physics.RaycastAll(transform.position, Vector3.right, Mathf.Max(1.55f, 2.5f * anger));
-        RaycastHit[] lefts = Physics.RaycastAll(transform.position, Vector3.left, Mathf.Max(1.55f, 2.5f * anger));
+        RaycastHit[] rights = Physics.RaycastAll(transform.position, Vector3.right, Mathf.Max(2.0f, 4.0f * anger));
+        RaycastHit[] lefts = Physics.RaycastAll(transform.position, Vector3.left, Mathf.Max(2.0f, 4.0f * anger));
 
         if (rights.Length + lefts.Length == 0)
         {
@@ -154,6 +164,7 @@ public class LonerController : MonoBehaviour
 
             if(Anger > 1.0f)
             {
+                gameManager.networkView.RPC("AddLog", RPCMode.Others, "Candidate #" + playerID + " could not hanlde the stress today");
                 networkView.RPC("Die", RPCMode.Others, playerID);
             }
         }
@@ -172,6 +183,7 @@ public class LonerController : MonoBehaviour
 
                 if (victim.Anger > 1.0f)
                 {
+                    gameManager.networkView.RPC("AddLog", RPCMode.Others, "Candidate #" + playerID + " debated his way into Candidate #" + victim.PlayerID);
                     networkView.RPC("Die", RPCMode.Others, victim.PlayerID);
                 }
             }
@@ -189,6 +201,7 @@ public class LonerController : MonoBehaviour
 
                 if(victim.Anger > 1.0f)
                 {
+                    gameManager.networkView.RPC("AddLog", RPCMode.Others, "Candidate #" + playerID + " deducted his way into Candidate #" + victim.PlayerID);
                     networkView.RPC("Die", RPCMode.Others, victim.PlayerID);
                 }
             }

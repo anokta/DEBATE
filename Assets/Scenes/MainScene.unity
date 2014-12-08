@@ -416,6 +416,7 @@ Transform:
   - {fileID: 473192302}
   - {fileID: 415028116}
   - {fileID: 760867475}
+  - {fileID: 1231997065}
   m_Father: {fileID: 0}
   m_RootOrder: 4
 --- !u!114 &995526781
@@ -433,6 +434,7 @@ MonoBehaviour:
   title: {fileID: 286532154}
   over: {fileID: 696811158}
   space: {fileID: 127110111}
+  rule: {fileID: 1231997066}
 --- !u!1 &1028870447
 GameObject:
   m_ObjectHideFlags: 0
@@ -445,6 +447,7 @@ GameObject:
   - 114: {fileID: 1028870452}
   - 114: {fileID: 1028870451}
   - 148: {fileID: 1028870450}
+  - 114: {fileID: 1028870454}
   - 82: {fileID: 1028870453}
   m_Layer: 0
   m_Name: GameManager
@@ -491,8 +494,8 @@ NetworkView:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1028870447}
   m_Enabled: 1
-  m_StateSynchronization: 0
-  m_Observed: {fileID: 0}
+  m_StateSynchronization: 1
+  m_Observed: {fileID: 1028870448}
   m_ViewID:
     m_ID: 1
     m_Type: 1
@@ -578,6 +581,19 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+--- !u!114 &1028870454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1028870447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94d9b71079a0f644a8483afd7d389ca4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guiSkin: {fileID: 11400000, guid: 6b787f3676a7ddd4da5333031bbcce55, type: 2}
+  capacity: 4
 --- !u!1 &1047922037
 GameObject:
   m_ObjectHideFlags: 0
@@ -641,6 +657,57 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
+--- !u!1 &1231997064
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1231997065}
+  - 132: {fileID: 1231997066}
+  m_Layer: 0
+  m_Name: Rule
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1231997065
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1231997064}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .5, y: .649999976, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 995526780}
+  m_RootOrder: 3
+--- !u!132 &1231997066
+GUIText:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1231997064}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Text: Apparently, you RULE the DEBATE!
+  m_Anchor: 4
+  m_Alignment: 1
+  m_PixelOffset: {x: 0, y: 0}
+  m_LineSpacing: 1
+  m_TabSize: 4
+  m_Font: {fileID: 12800000, guid: f59133d6cbd64fa41aad1202fbbf7c00, type: 3}
+  m_Material: {fileID: 0}
+  m_FontSize: 40
+  m_FontStyle: 0
+  m_Color:
+    serializedVersion: 2
+    rgba: 15527148
+  m_PixelCorrect: 1
+  m_RichText: 1
 --- !u!1 &1330273725
 GameObject:
   m_ObjectHideFlags: 0

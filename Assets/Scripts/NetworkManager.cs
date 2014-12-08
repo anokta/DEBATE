@@ -150,4 +150,8 @@ public class NetworkManager : MonoBehaviour
 
         serverInitialized = false;
     }
+    void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
+    {
+        stream.Serialize(ref PlayerCount);
+    }
 }
