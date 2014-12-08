@@ -122,7 +122,6 @@ public class LonerController : MonoBehaviour
 
             if (myID == playerID) // && Camera.main.transform.position != transform.position - Vector3.forward * 5.0f)
             {
-                Vector3 vel = Vector3.zero;
                 Vector3 target = new Vector3(0.0f, 1.0f, -5.0f);
 
                 Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, anger > 0.0f ? target + transform.position : target, Time.deltaTime);

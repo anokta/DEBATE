@@ -8,6 +8,8 @@ public class NetworkManager : MonoBehaviour
     public int masterPort = 23466;
     public string masterIP = "54.174.144.122";
 
+    public int facilitatorPort = 50005;
+
     public string gameTypeName = "MatchmakerLD31";
     public string gameName = "MatchmakerMain";
 
@@ -19,7 +21,7 @@ public class NetworkManager : MonoBehaviour
     public float waitInterval = 5.0f;
     float elapsed;
 
-    bool serverInitialized;
+    public bool serverInitialized;
 
     GameManager gameManager;
 
@@ -28,6 +30,9 @@ public class NetworkManager : MonoBehaviour
         MasterServer.port = masterPort;
         MasterServer.ipAddress = masterIP;
         MasterServer.dedicatedServer = true;
+
+        Network.natFacilitatorPort = facilitatorPort;
+        Network.natFacilitatorIP = masterIP;
 
         PlayerCount = 0;
 
@@ -38,7 +43,7 @@ public class NetworkManager : MonoBehaviour
 
     void Update()
     {
-        if ((!Network.isServer || !serverInitialized) && Time.time - elapsed > waitInterval)
+        if (((!Network.isServer && isHost) || !serverInitialized) && Time.time - elapsed > waitInterval)
         {
             Debug.Log("Connecting..");
 

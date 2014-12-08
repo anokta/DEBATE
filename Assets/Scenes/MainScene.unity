@@ -469,12 +469,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   masterPort: 23466
   masterIP: 54.174.144.122
+  facilitatorPort: 50005
   gameTypeName: DebateLD31
   gameName: DebateMain
   connections: 16
   port: 25005
-  isHost: 1
+  isHost: 0
   waitInterval: 3
+  serverInitialized: 0
 --- !u!4 &1028870449
 Transform:
   m_ObjectHideFlags: 0
