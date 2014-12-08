@@ -3,9 +3,11 @@ using System.Collections;
 
 public class GUIManager : MonoBehaviour {
 
-    float currentAlpha, targetAlpha;
+    public static float currentAlphaOver;
+    float currentAlphaMenu, targetAlphaMenu;
+    float targetAlphaOver;
 
-    public GUIText welcome, title;
+    public GUIText welcome, title, over, space;
 
     void Awake()
     {
@@ -22,8 +24,10 @@ public class GUIManager : MonoBehaviour {
     }
 
 	// Use this for initialization
-	void Start () {
-        currentAlpha = targetAlpha = 0.0f;
+    void Start()
+    {
+        currentAlphaMenu = targetAlphaMenu = 0.0f;
+        currentAlphaOver = targetAlphaOver = 0.0f;
 	}
 	
 	// Update is called once per frame
@@ -31,35 +35,49 @@ public class GUIManager : MonoBehaviour {
     {
         if (!Network.isServer)
         {
-            if (currentAlpha != targetAlpha)
+            if (currentAlphaMenu != targetAlphaMenu)
             {
-                currentAlpha = Mathf.Lerp(currentAlpha, targetAlpha, 1.5f * Time.deltaTime);
+                currentAlphaMenu = Mathf.Lerp(currentAlphaMenu, targetAlphaMenu, 1.5f * Time.deltaTime);
+            }
+            if (currentAlphaOver != targetAlphaOver)
+            {
+                currentAlphaOver = Mathf.Lerp(currentAlphaOver, targetAlphaOver, 3.0f * Time.deltaTime);
             }
 
             Color c;
             
             c = welcome.color;
-            c.a = currentAlpha;
+            c.a = currentAlphaMenu;
             welcome.color = c;
 
+            c.a = currentAlphaOver;
+            over.color = c;
+
             c = title.color;
-            c.a = currentAlpha;
+
+            c.a = currentAlphaMenu;
             title.color = c;
+
+            c.a = currentAlphaOver;
+            space.color = c;
         }
     }
 
     void GameMenu()
     {
-        targetAlpha = 1.0f;
+        targetAlphaMenu = 1.0f;
+        targetAlphaOver = 0.0f;
     }
 
     void GameStart()
     {
-        targetAlpha = 0.0f;
+        targetAlphaMenu = 0.0f;
+        targetAlphaOver = 0.0f;
     }
 
     void GameOver()
     {
-
+        targetAlphaMenu = 0.0f;
+        targetAlphaOver = 1.0f;
     }
 }

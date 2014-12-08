@@ -74,6 +74,57 @@ NavMeshSettings:
     widthInaccuracy: 16.666666
     heightInaccuracy: 10
   m_NavMesh: {fileID: 0}
+--- !u!1 &127110109
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 127110110}
+  - 132: {fileID: 127110111}
+  m_Layer: 0
+  m_Name: Space
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &127110110
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 127110109}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .5, y: .5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 760867475}
+  m_RootOrder: 1
+--- !u!132 &127110111
+GUIText:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 127110109}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Text: SPACE to recover
+  m_Anchor: 4
+  m_Alignment: 1
+  m_PixelOffset: {x: 0, y: 0}
+  m_LineSpacing: 1
+  m_TabSize: 4
+  m_Font: {fileID: 12800000, guid: f59133d6cbd64fa41aad1202fbbf7c00, type: 3}
+  m_Material: {fileID: 0}
+  m_FontSize: 36
+  m_FontStyle: 0
+  m_Color:
+    serializedVersion: 2
+    rgba: 16777215
+  m_PixelCorrect: 1
+  m_RichText: 1
 --- !u!1 &286532153
 GameObject:
   m_ObjectHideFlags: 0
@@ -198,13 +249,93 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 473192301}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: .100000001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 961851297}
   - {fileID: 286532155}
   m_Father: {fileID: 995526780}
   m_RootOrder: 0
+--- !u!1 &696811156
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 696811157}
+  - 132: {fileID: 696811158}
+  m_Layer: 0
+  m_Name: Over
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &696811157
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 696811156}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .5, y: .649999976, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 760867475}
+  m_RootOrder: 0
+--- !u!132 &696811158
+GUIText:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 696811156}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Text: You got DEBATED, my fellow friend.
+  m_Anchor: 4
+  m_Alignment: 1
+  m_PixelOffset: {x: 0, y: 0}
+  m_LineSpacing: 2
+  m_TabSize: 4
+  m_Font: {fileID: 12800000, guid: f59133d6cbd64fa41aad1202fbbf7c00, type: 3}
+  m_Material: {fileID: 0}
+  m_FontSize: 48
+  m_FontStyle: 0
+  m_Color:
+    serializedVersion: 2
+    rgba: 14803425
+  m_PixelCorrect: 1
+  m_RichText: 1
+--- !u!1 &760867474
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 760867475}
+  m_Layer: 0
+  m_Name: Over
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &760867475
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 760867474}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: .100000001, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 696811157}
+  - {fileID: 127110110}
+  m_Father: {fileID: 995526780}
+  m_RootOrder: 2
 --- !u!1 &961851295
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,6 +415,7 @@ Transform:
   m_Children:
   - {fileID: 473192302}
   - {fileID: 415028116}
+  - {fileID: 760867475}
   m_Father: {fileID: 0}
   m_RootOrder: 4
 --- !u!114 &995526781
@@ -299,6 +431,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   welcome: {fileID: 961851296}
   title: {fileID: 286532154}
+  over: {fileID: 696811158}
+  space: {fileID: 127110111}
 --- !u!1 &1028870447
 GameObject:
   m_ObjectHideFlags: 0
@@ -334,10 +468,10 @@ MonoBehaviour:
   masterIP: 54.174.144.122
   gameTypeName: DebateLD31
   gameName: DebateMain
-  connections: 128
+  connections: 64
   port: 25005
   isHost: 1
-  waitInterval: 4
+  waitInterval: 3
 --- !u!4 &1028870449
 Transform:
   m_ObjectHideFlags: 0
@@ -385,7 +519,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 100002, guid: 3042cfc7f216dd04a840e51bf38f6678, type: 2}
-  noiseVolume: .200000003
+  noiseVolume: .25
 --- !u!82 &1028870453
 AudioSource:
   m_ObjectHideFlags: 0
@@ -695,7 +829,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 19
+  orthographic size: 15
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

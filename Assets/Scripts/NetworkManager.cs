@@ -83,7 +83,7 @@ public class NetworkManager : MonoBehaviour
     void GameMenu()
     {
         serverInitialized = false;
-        elapsed = -waitInterval;
+        elapsed = Time.time;
     }
 
     void OnServerInitialized()

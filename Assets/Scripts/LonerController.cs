@@ -19,8 +19,8 @@ public class LonerController : MonoBehaviour
     const int MAX_SHOUT = 7;
 
     const float MAX_PUSH = 1000.0f;
-    const float MIN_ANGER = 150.0f;
-    const float MAX_ANGER = 400.0f;
+    const float MIN_ANGER = 30.0f;
+    const float MAX_ANGER = 60.0f;
 
     const float UNIT_ANGER = 0.05f;
 
@@ -68,7 +68,7 @@ public class LonerController : MonoBehaviour
 
             shoutCurrent++;
 
-            rigidbody.AddForce(new Vector3(Random.Range(-0.15f, 0.15f), 1.0f, 0.0f) * (40 + Mathf.Min(0.5f, anger) * 10));
+            rigidbody.AddForce(new Vector3(Random.Range(-0.15f, 0.15f), 1.0f, 0.0f) * (41 + Mathf.Min(0.5f, anger) * 10));
         }
         else
         {
@@ -98,7 +98,7 @@ public class LonerController : MonoBehaviour
             {
                 if (myID == playerID)
                 {
-                    Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, anger > 0.0f ? 15.0f - 13.0f * anger * anger : 19.0f, 2 * Time.deltaTime);
+                    Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, (anger > 0.0f || shoutCurrent < shoutLength) ? 12.0f - 10.0f * anger : 15.0f, 1.75f * Time.deltaTime);
                 }
 
                 currentColor = Color.Lerp(currentColor, targetColor, 2.5f * Time.deltaTime);
@@ -145,8 +145,8 @@ public class LonerController : MonoBehaviour
         shoutLength = Random.Range(MIN_SHOUT, MAX_SHOUT);
 
         // Check encounters
-        RaycastHit[] rights = Physics.RaycastAll(transform.position, Vector3.right, Mathf.Max(1.0f, 1.5f * anger));
-        RaycastHit[] lefts = Physics.RaycastAll(transform.position, Vector3.left, Mathf.Max(1.0f, 1.5f * anger));
+        RaycastHit[] rights = Physics.RaycastAll(transform.position, Vector3.right, Mathf.Max(1.55f, 2.5f * anger));
+        RaycastHit[] lefts = Physics.RaycastAll(transform.position, Vector3.left, Mathf.Max(1.55f, 2.5f * anger));
 
         if (rights.Length + lefts.Length == 0)
         {
@@ -166,7 +166,9 @@ public class LonerController : MonoBehaviour
 
                 LonerController victim = hit.transform.gameObject.GetComponent<LonerController>();
                 victim.Anger += 2.5f * UNIT_ANGER;
-                victim.rigidbody.AddForce(Mathf.Min(MAX_PUSH, 1.0f / hit.distance * Mathf.Max(MIN_ANGER, anger * MAX_ANGER)) * Vector3.right);
+
+                float force = Mathf.Min(MAX_PUSH, Mathf.Max(0.0f, speed - victim.rigidbody.velocity.x) * 1.0f / hit.distance * Mathf.Max(MIN_ANGER, anger * MAX_ANGER)); 
+                victim.rigidbody.AddForce(force * Vector3.right);
 
                 if (victim.Anger > 1.0f)
                 {
@@ -181,7 +183,9 @@ public class LonerController : MonoBehaviour
                 Anger -= 1.25f * UNIT_ANGER;
                 LonerController victim = hit.transform.gameObject.GetComponent<LonerController>();
                 victim.Anger += 2.5f * UNIT_ANGER;
-                victim.rigidbody.AddForce(Mathf.Min(MAX_PUSH, 1.0f / hit.distance * Mathf.Max(MIN_ANGER, anger * MAX_ANGER)) * Vector3.left);
+
+                float force = Mathf.Min(MAX_PUSH, Mathf.Max(0.0f, victim.rigidbody.velocity.x + speed) * 1.0f / hit.distance * Mathf.Max(MIN_ANGER, anger * MAX_ANGER)); 
+                victim.rigidbody.AddForce(force * Vector3.left);
 
                 if(victim.Anger > 1.0f)
                 {
@@ -254,6 +258,8 @@ public class LonerController : MonoBehaviour
         if (int.Parse(Network.player.ToString()) == id)
         {
             Network.Disconnect();
+
+            GameEventManager.TriggerGameOver();
         }
     }
 }

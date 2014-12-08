@@ -43,14 +43,23 @@ public class GameManager : MonoBehaviour {
                     if (Input.GetKeyDown(KeyCode.Escape))
                     {
                         Network.Disconnect();
+
+                        GameEventManager.TriggerGameOver();
                     }
                     break;
                 case GameEventManager.GameState.Over:
-                    if (!Network.isClient && Input.GetKeyDown(KeyCode.Space))
+                    if (!Network.isClient && 1.0f - GUIManager.currentAlphaOver < 0.01f && Input.GetKeyDown(KeyCode.Space))
                     {
                         GameEventManager.TriggerGameMenu();
                     }
+                    
                     break;
+            }
+
+            if(GameEventManager.CurrentState != GameEventManager.GameState.Running)
+            {
+                Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, new Vector3(0.0f, 1.0f, -5.0f), 2.0f * Time.deltaTime);
+                Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, 15.0f, 3.0f * Time.deltaTime);
             }
 
             if (noise.volume != targetVolume)
@@ -84,7 +93,7 @@ public class GameManager : MonoBehaviour {
 
     Vector3 getPlayerSpawnPosition()
     {
-        return new Vector3(Random.Range(-2 * NetworkManager.PlayerCount, 2 * NetworkManager.PlayerCount), 1.0f, 0.0f);
+        return new Vector3(Mathf.Min(15.0f, Mathf.Max(-15.0f, Random.Range(-5 * NetworkManager.PlayerCount, 5 * NetworkManager.PlayerCount))), 2.0f, 0.0f);
     }
 
     Color getSkinColor()
