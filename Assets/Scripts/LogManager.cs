@@ -1,4 +1,11 @@
-﻿using UnityEngine;
+﻿// ----------------------------------------------------------------------
+//   DEBATE - Ludum Dare 31 Compo Entry
+//
+//     Copyright 2014 Alper Gungormusler. All rights reserved.
+//
+// -----------------------------------------------------------------------
+
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
